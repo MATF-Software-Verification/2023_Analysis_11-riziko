@@ -1,0 +1,3 @@
+[submodule "11-riziko"]
+	path = 11-riziko
+	url = https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2022-2023/11-riziko.git
