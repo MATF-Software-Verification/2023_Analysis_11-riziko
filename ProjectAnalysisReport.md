@@ -64,3 +64,31 @@ Može se primetiti da ima velika količina memorije koja nije oslobođena na ade
 U ovom slučaju na kraju funkcije fali pozivanje operatora *delete*. Ova situacija se mogla izbeći i korišćenjem pametnog pokazivača ***unique_ptr***, na taj način na kraju funkcije bi se memorija automatski oslobodila. Dodatno, može se koristiti i pametni pokazivač ***shared_ptr***, ako je potrebno da više objekata imaju pokazivač na istu memoriju, kada se unište svi pokazivači, automatski će se osloboditi i taj blok memorije.
 
 Iako u klasama postoje destruktori, oni su uglavnom podrazumevani (sem u klasi *Game.cpp* i *MainWindow.cpp*). Jedno od unapređenja je bolje korišćenje samih destruktora i oslobađanje memorije u okviru njih.
+
+### 1.2. Callgrind
+**Callgrind** je alat koji generiše listu poziva funkcija korisničkog programa u vidu grafa. U osnovnim podešavanjima sakupljeni podaci se sastoje od:
+* Broja izvršenih instrukcija
+* Njihov odnos sa linijom u izvršnom kodu
+* Odnos pozivaoc/pozvann između funkcija
+* Broj poziva funkcija
+
+Pored toga, uz navođenje dodatnih opcija, ovaj alat može da vrši i analizu upotrebe keš memorije i profajliranje grana programa, pa samim tim ovaj alat predstavlja proširenje alata **Cachegrind**.
+  
+Da bi alat Callgrind mogao da se pokrene pre toga je projekat **potrebno** kompajlirati u *profile* režimu. Potrebno je da se kompajlira u ovom režimu da bi se izvršile dodatne optimizacije i da bi zapravo softver bio u stanju koje je slično onom za produkciju. Glavna razlika u odnosu na *release* režim je taj što u ovom režimu postoje dodatne debug informacije.
+
+U okviru ovog projekta dodata je skripta [*run_callgrind.sh*](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Valgrind/Callgrind/run_callgrind.sh) u kojoj se nalazi i komanda za pokretanje ovog alata.
+
+U okviru fajl [callgrind.out.25584](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Valgrind/Callgrind/callgrind.out.25584) se nalazi rezultat rada alata Callgrind. Ovakav izveštaj nije čitljiv pa za njegovo razumevanje se koristi alat **KCachegrind**, koji pruža grafičku reprezentaciju podataka.
+
+Na sledećoj slici može da se vidi izgled izveštaja u okviru alata **KCachegrind**:
+![callgrind_visual.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Valgrind/Callgrind/callgrind_visual.png)
+
+Sa leve strane možemo da vidimo koliko puta je koja funkcija pozvana kao i broj izvršenih funkcija:
+![callgrind_number_of_calls.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Valgrind/Callgrind/callgrind_number_of_calls.png)
+
+Ako kliknemo na neko funkciju sa desne strane nam se otvaraju dodatni podaci o izvršavanju date funkcije gde možemo da vidimo i koliko puta je koja funkcija pozvala odabranu funkciju:
+![callgrind_all_callers.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Valgrind/Callgrind/callgrind_all_callers.png)
+
+***Zaključak na osnovu izveštaja alata Callgrind***
+
+U okviru izveštaja nije primećen veliki broj poziva funkcija koju su implementirali autori projekta. Najviše je poziva Qt funkcija na koje je veoma teško uticati.
