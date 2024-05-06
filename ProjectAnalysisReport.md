@@ -92,3 +92,85 @@ Ako kliknemo na neko funkciju sa desne strane nam se otvaraju dodatni podaci o i
 ***Zaključak na osnovu izveštaja alata Callgrind***
 
 U okviru izveštaja nije primećen veliki broj poziva funkcija koju su implementirali autori projekta. Najviše je poziva Qt funkcija na koje je veoma teško uticati.
+
+
+## 2. Clang
+**Clang** je kompajler otvorenog koda za C familiju programskih jezika. Koristi LLVM optimizator i generator koda.
+
+
+### 2.1. Clang-tidy
+**Clang-tidy** statički analizator koda koji je zasnovan na Clang-u. Njegova uloga je da pomogne u prepoznavanju različiih programerskih grešaka kao što su kršenje stila pisanja, pogrešno korišćenje interfejsa ili da prepozna određene bagove koje je moguće pronaći bez prevođenja izvornog koda.
+
+U okviru ovog projekta **Clang-tidy** je korišćen kao deo QtCreator-a.
+Da bi se pristupilo ovom analizatoru potrebno je kliknuti na tab *Analyze* i odabrati opciju *Clang-tidy*:
+
+![choose_clang_tidy.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/choose_clang_tidy.png)
+
+Nakon toga, otvoriće se prozor u okviru kog možemo da biramo fajlove koje želimo da analiziramo:
+
+![choose_files_to_analyze.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/choose_files_to_analyze.png)
+
+Klikom na dugme *Analyze* pokrenuće se analiza fajlova:
+
+![analysis_in_progress.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/analysis_in_progress.png)
+
+Dobija se sledeći rezultat:
+
+![clang_tidy_results.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/clang_tidy_results.png)
+
+Klikom na neko od izbačenih upozorenja možemo da vidimo korake pod kojim može da dođe do slučaja na koji nas *Clang-tidy* upozorava:
+
+![clang_tidy_steps.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/clang_tidy_steps.png)
+
+Ovim smo dobili rezultate kada smo pokrenuli Clang-tidy u podrazumevanoj konfiguraciji (*clang* provera je uključena), dodatno možemo da dodamo i našu konfiguraciju. Potrebno je kliknuti na tab *Edit* i odabrati opciju *Preferences* iz padajućeg menija. Nakon što to kliknemo pronađemo sledeći meni:
+
+![choose_custom_configuration.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/choose_custom_configuration.png)
+
+Otvoriće se sledeći prozor gde možemo za **Clang-tidy** (isto važi i za *Clazy*) odaberemo različite provere koje želimo da izvrši.
+
+![specify_configuration.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/specify_configuration.png)
+
+U slučaju da odaberemo *bugprone* proveru, koja nam govori potencijalna mesta u kodu gde mogu da nastanu bagovi, dobićemo sledeće rezultate:
+
+![bugprone_configuration.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/bugprone_configuration.png)
+
+A ako odaberemo *readibility* proveru, koja nam govori mesta gde možemo dodatno unaprediti kod da bude razumljiviji, dobićemo sledeće rezultate:
+
+![readability_configuration.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clang-Tidy/readability_configuration.png)
+
+***Zaključak na osnovu izveštaja alata Clang-tidy***
+
+U zavisnosti od konfiguracije dobili smo različita upozorenja.
+
+Za proveru *readaibility*:
+* Treba uvesti konstante umesto magičnih brojeva
+* Imena varijabli i parametara koji su prekratki treba promeniti tako da budu duži
+* Određene metode u okviru klasa mogu da budu statičke
+* Određene redundantne izraze treba izbaciti
+* Ne treba koristiti *else* nakon naredbe *return* u okviru prethodnog *if* grananja
+
+Za proveru *bugprone*:
+* Dobijamo upozorenja da proverimo konverzije iz šireg tipa u uži tip - *long long* u projektu se konvertuje u *int*
+* U jednoj od funkcija imamo susedne parametre koji su slično imenovani pa slučajno mogu da se zamene
+
+Za osnovnu, *clang* proveru:
+* Izbaciti promenljive koje se nikada ne koriste
+* Proveriti i osigurati se da ne mogu da se dese slučajevi da je neki od pokazivača neinicijalizovan
+
+
+### 2.1. Clazy
+**Clazy** je alat koji pomaže Clang-u da razume semantiku Qt-a. Prikazuje upozorenja koja su povezana sa Qt-em koja mogu biti od nepotrebne alokacije memorije do toga da se API pogrešno koristi. Dodatno, može da prikaže akcije koje su potrebne da se srede neki od problema.
+
+U okviru ovog projekta **Clazy** je korišćen kao deo QtCreator-a.
+Slično kao i kod *Clang-tidy*, da bi se pristupilo ovom analizatoru potrebno je kliknuti na tab *Analyze* i odabrati opciju *Clazy*.
+Isto se biraju fajlovi koje želimo da analiziramo.
+Takođe, postoje dodatne konfiguracije i *Clazy* alata u zavisnosti od toga koliko potencijalno lažnih upozorenja želimo.
+Na sledećoj slici su prikazani rezultati koji su dobijeni pod osnovnom konfiguracijom (ova konfiguracija uključuje nivo 0 - bez lažnih upozorenja, i nivo 1 - veoma malo lažnih upozorenja):
+
+![clazy_results.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Clang/Clazy/clazy_results.png)
+
+***Zaključak na osnovu izveštaja alata Clazy***
+
+Skoro sva upozorenja su vezana za imenovanje *slotova*. Koriste stari pristup, odnosno da ime slota počinje sa *on_*. Ovaj način podrazumeva da su automatski slotovi povezani sa odgovarajućim signalom, ali ovaj pristup je loš jer da se promeni ime signala ili slota, taj signal i slot više neće biti povezani. Bolje je eksplicitno povezati signal i slot uz naredbu *connect*.
+
+Drugo upozorenje koje se javlja je da *Q_PROPERTY* treba da bude *CONSTANT* ili *NOTIFY*. *Q_PROPERTY* se uglavnom koristi za povezivanje varijable sa geterom i seterom kao i slanje signala. Prednost korišćenja *Q_PROPERTY* je to što se takvim varijablama može pristupiti u okviru QML-a. U konkretnim slučajevima, ne može da bude konstantna vrednost zato što postoji i seter i samim tim vrednost varijable može da se promeni. *Notify* je opcioni deo i s obzirom da ne treba da se šalje nigde signal ovaj deo može da se izostavi. Samim tim, ova upozorenja mogu da se ignorišu.
