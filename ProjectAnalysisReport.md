@@ -207,3 +207,25 @@ Ova komanda generiše naredni graf:
 
 Na osnovu izveštaja možemo da vidimo da je prikupljeno 32.000 uzoraka a da je ukupan broj događaja oko 8.2 milijarde.
 Posmatrajući ovaj izveštaj možemo videti da u koloni *Children* komanda *QXcbEventQueue* sa svom svojom decom koju poziva odnosi najveći procenat u odnosu na ostale. Ovo može značiti da u okviru projekta postoji previše događaja koji se šalju i na koje se reaguje. Primećeno je da u okviru fajla *mainwindow.h* postoji *slot* da se reaguje na klik za svaku državu, ovo je verovatno moglo da se reši i na drugačiji način i da postoji jedan slot koji će da reaguje na događaj kada se klikne na državu a da se tom slotu prosleđuje ID države čime bi se samim tim smanjio broj događaja.
+
+
+## 4. Flawfinder
+**Flawfinder** je alat koji služi da pronađe sigurnosne propuste u programima koji su pisani u C ili C++ programskom jeziku. Rezultat ovog alata je spisak potencijalnih sigurnosnih propusta koji su sortirani na osnovu rizika. Oni koji su rizičniji su prikazani na vrhu. Svakom od njih se dodeljuje i nivo rizičnosti koji može da bude od 0 do 5, gde je 0 najmanje rizičan a 5 najrizičniji.
+
+Ovaj alat ne garantuje da će pronaći sve sigurnosne propuste kao ni to da svaki propust koji prijavi je zapravo i slabost programa.
+
+Da bi se instalirao ovaj alat potrebno je pokrenuti narednu komandu:
+<pre>
+  sudo apt-get install flawfinder
+</pre>
+
+Da bi se ovaj alat pokrenuo dovoljno mu je zadati folder koji želimo da analiziramo a on će sam naći sve C i C++ fajlove. Podrazumevano će proći i kroz sve poddirektorijume a možemo da mu kažemo i do koje dubine hoćemo da ide.
+
+Pokretanjem skripte [run_flawfinder.sh](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Flawfinder/run_flawfinder.sh) pokreće se ovaj alat i generisaće rezultat u vidu html strane [flawfinder_result.html](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Flawfinder/flawfinder_result.html):
+
+![security_flaws.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Flawfinder/security_flaws.png)
+
+***Zaključak na osnovu izveštaja alata Flawfinder***
+
+Pronađeno je 35 potencijalnih sigurnosnih rizika. Od tih 35, njih 30 rizika prijavljuje za *catch.hpp* biblioteku. Ova biblioteka je uključena za potrebe testiranja, kao moguće unapređenje trebalo bi koristiti biblioteku *catch2* koja radi i sa novijim standardom C++ a i nema toliko potencijalnih sigurnosnih propusta.
+Preostala upozorenja su vezana za *[CWE-362](https://cwe.mitre.org/data/definitions/362.html)*. Potencijalno se dešava paralelno izvršavanje deljenog resursa sa lošom sinhronizacijom. Ovo ne bi trebalo da predstavlja opasnosnost jer je upozorenje vezano za klasu *Initializer* koja se uključuje samo u okviru *mainwindow.cpp* fajla, na početku i koji inicijalizuje igricu. Svakako bi trebalo obratiti pažnju jer baš u slučaju ove klase, u okviru ovog fajla, se ne vrši adekvatno oslobađanje memorije i fali *delete* operator da obriše alociranu memoriju za *Initializer*.
