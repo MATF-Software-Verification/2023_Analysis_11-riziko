@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf8">
+<title>Flawfinder Results</title>
+<meta name="author" content="David A. Wheeler">
+<meta name="keywords" lang="en" content="flawfinder results, security scan">
+</head>
+<body>
+<h1>Flawfinder Results</h1>
+Here are the security scan results from
+<a href="https://dwheeler.com/flawfinder">Flawfinder version 2.0.10</a>,
+(C) 2001-2019 <a href="https://dwheeler.com">David A. Wheeler</a>.
+Number of rules (primarily dangerous function names) in C/C++ ruleset: 223
+<p>
+Examining ../11-riziko/build/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp <br>
+Examining ../11-riziko/Test/testTamara.cpp <br>
+Examining ../11-riziko/Test/catch.hpp <br>
+Examining ../11-riziko/Test/testNebojsa.cpp <br>
+Examining ../11-riziko/Test/testUros.cpp <br>
+Examining ../11-riziko/Test/main.cpp <br>
+Examining ../11-riziko/Test/testMaja.cpp <br>
+Examining ../11-riziko/Test/testOgnjen.cpp <br>
+Examining ../11-riziko/build-riziko-Desktop-Debug/moc_mainwindow.cpp <br>
+Examining ../11-riziko/build-riziko-Desktop-Debug/ui_mainwindow.h <br>
+Examining ../11-riziko/build-riziko-Desktop-Debug/qrc_images.cpp <br>
+Examining ../11-riziko/build-riziko-Desktop-Debug/moc_predefs.h <br>
+Examining ../11-riziko/server/server/card.h <br>
+Examining ../11-riziko/server/server/game.cpp <br>
+Examining ../11-riziko/server/server/card.cpp <br>
+Examining ../11-riziko/server/server/settings.h <br>
+Examining ../11-riziko/server/server/player.h <br>
+Examining ../11-riziko/server/server/territory.h <br>
+Examining ../11-riziko/server/server/settings.cpp <br>
+Examining ../11-riziko/server/server/mainwindow.cpp <br>
+Examining ../11-riziko/server/server/initializer.h <br>
+Examining ../11-riziko/server/server/region.cpp <br>
+Examining ../11-riziko/server/server/player.cpp <br>
+Examining ../11-riziko/server/server/region.h <br>
+Examining ../11-riziko/server/server/destroyplayercard.cpp <br>
+Examining ../11-riziko/server/server/mainwindow.h <br>
+Examining ../11-riziko/server/server/cardtask.cpp <br>
+Examining ../11-riziko/server/server/territory.cpp <br>
+Examining ../11-riziko/server/server/initializer.cpp <br>
+Examining ../11-riziko/server/server/regionoccupycard.h <br>
+Examining ../11-riziko/server/server/game.h <br>
+Examining ../11-riziko/server/server/territoryoccupycard.cpp <br>
+Examining ../11-riziko/server/server/tcpserver/tcpserver.cpp <br>
+Examining ../11-riziko/server/server/tcpserver/tcpserver.h <br>
+Examining ../11-riziko/server/server/tcpserver/main.cpp <br>
+Examining ../11-riziko/server/server/main.cpp <br>
+Examining ../11-riziko/server/server/regionoccupycard.cpp <br>
+Examining ../11-riziko/server/server/destroyplayercard.h <br>
+Examining ../11-riziko/server/server/cardtask.h <br>
+Examining ../11-riziko/server/server/territoryoccupycard.h <br>
+Examining ../11-riziko/server/client/tcpclient/tcpclient.h <br>
+Examining ../11-riziko/server/client/tcpclient/tcpclient.cpp <br>
+Examining ../11-riziko/server/client/main.cpp <br>
+Examining ../11-riziko/riziko/card.h <br>
+Examining ../11-riziko/riziko/game.cpp <br>
+Examining ../11-riziko/riziko/card.cpp <br>
+Examining ../11-riziko/riziko/player.h <br>
+Examining ../11-riziko/riziko/territory.h <br>
+Examining ../11-riziko/riziko/mainwindow.cpp <br>
+Examining ../11-riziko/riziko/initializer.h <br>
+Examining ../11-riziko/riziko/region.cpp <br>
+Examining ../11-riziko/riziko/player.cpp <br>
+Examining ../11-riziko/riziko/region.h <br>
+Examining ../11-riziko/riziko/destroyplayercard.cpp <br>
+Examining ../11-riziko/riziko/mainwindow.h <br>
+Examining ../11-riziko/riziko/cardtask.cpp <br>
+Examining ../11-riziko/riziko/territory.cpp <br>
+Examining ../11-riziko/riziko/initializer.cpp <br>
+Examining ../11-riziko/riziko/regionoccupycard.h <br>
+Examining ../11-riziko/riziko/game.h <br>
+Examining ../11-riziko/riziko/territoryoccupycard.cpp <br>
+Examining ../11-riziko/riziko/main.cpp <br>
+Examining ../11-riziko/riziko/regionoccupycard.cpp <br>
+Examining ../11-riziko/riziko/destroyplayercard.h <br>
+Examining ../11-riziko/riziko/cardtask.h <br>
+Examining ../11-riziko/riziko/territoryoccupycard.h <br>
+
+<h2>Final Results</h2>
+<ul>
+<li>../11-riziko/Test/catch.hpp:4644: <b>  [3] </b> (random) <i> random:
+  This function is not sufficiently random for security-related functions
+  such as key and nonce creation (<a
+  href="https://cwe.mitre.org/data/definitions/327.html">CWE-327</a>). Use a
+  more secure technique for acquiring random values. </i>
+<li>../11-riziko/Test/catch.hpp:4653: <b>  [3] </b> (random) <i> random:
+  This function is not sufficiently random for security-related functions
+  such as key and nonce creation (<a
+  href="https://cwe.mitre.org/data/definitions/327.html">CWE-327</a>). Use a
+  more secure technique for acquiring random values. </i>
+<li>../11-riziko/Test/catch.hpp:13149: <b>  [3] </b> (random) <i> srand:
+  This function is not sufficiently random for security-related functions
+  such as key and nonce creation (<a
+  href="https://cwe.mitre.org/data/definitions/327.html">CWE-327</a>). Use a
+  more secure technique for acquiring random values. </i>
+<li>../11-riziko/Test/catch.hpp:2156: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:4455: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:5959: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:7587: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:11484: <b>  [2] </b> (buffer) <i> memcpy:
+  Does not check for buffer overflows when copying to destination (<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>). Make
+  sure destination can always hold the source data. </i>
+<li>../11-riziko/Test/catch.hpp:11491: <b>  [2] </b> (buffer) <i> memcpy:
+  Does not check for buffer overflows when copying to destination (<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>). Make
+  sure destination can always hold the source data. </i>
+<li>../11-riziko/Test/catch.hpp:12015: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:12102: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:12111: <b>  [2] </b> (tmpfile) <i> tmpfile:
+  Function tmpfile() has a security flaw on some systems (e.g., older System
+  V systems) (<a
+  href="https://cwe.mitre.org/data/definitions/377.html">CWE-377</a>). </i>
+<li>../11-riziko/Test/catch.hpp:12135: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:12619: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:13478: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:13639: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:13688: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:14443: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:14544: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:15773: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/Test/catch.hpp:15780: <b>  [2] </b> (buffer) <i> sprintf:
+  Does not check for buffer overflows (<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>). Use
+  sprintf_s, snprintf, or vsnprintf. Risk is low because the source has a
+  constant maximum length. </i>
+<li>../11-riziko/Test/catch.hpp:16377: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:16411: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:16816: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/build-riziko-Desktop-Debug/moc_mainwindow.cpp:25: <b>  [2] </b> (buffer) <i> char:
+  Statically-sized arrays can be improperly restricted, leading to potential
+  overflows or other issues (<a
+  href="https://cwe.mitre.org/data/definitions/119.html">CWE-119</a>!/<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>).
+  Perform bounds checking, use functions that limit length, or ensure that
+  the size is larger than the maximum possible length. </i>
+<li>../11-riziko/riziko/initializer.cpp:100: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/riziko/initializer.cpp:269: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/server/server/initializer.cpp:105: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/server/server/initializer.cpp:306: <b>  [2] </b> (misc) <i> open:
+  Check when opening files - can an attacker redirect it (via symlinks),
+  force the opening of special file type (e.g., device files), move things
+  around to create a race condition, control its ancestors, or change its
+  contents? (<a
+  href="https://cwe.mitre.org/data/definitions/362.html">CWE-362</a>). </i>
+<li>../11-riziko/Test/catch.hpp:3721: <b>  [1] </b> (buffer) <i> is_permutation:
+  Function does not check the second iterator for over-read conditions (<a
+  href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a>). This
+  function is often discouraged by most C++ coding standards in favor of its
+  safer alternatives provided since C++14. Consider using a form of this
+  function that checks the second iterator before potentially overflowing it. </i>
+<li>../11-riziko/Test/catch.hpp:13507: <b>  [1] </b> (buffer) <i> getchar:
+  Check buffer boundaries if used in a loop including recursive loops (<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>, <a
+  href="https://cwe.mitre.org/data/definitions/20.html">CWE-20</a>). </i>
+<li>../11-riziko/Test/catch.hpp:13512: <b>  [1] </b> (buffer) <i> getchar:
+  Check buffer boundaries if used in a loop including recursive loops (<a
+  href="https://cwe.mitre.org/data/definitions/120.html">CWE-120</a>, <a
+  href="https://cwe.mitre.org/data/definitions/20.html">CWE-20</a>). </i>
+<li>../11-riziko/Test/catch.hpp:13811: <b>  [1] </b> (buffer) <i> equal:
+  Function does not check the second iterator for over-read conditions (<a
+  href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a>). This
+  function is often discouraged by most C++ coding standards in favor of its
+  safer alternatives provided since C++14. Consider using a form of this
+  function that checks the second iterator before potentially overflowing it. </i>
+<li>../11-riziko/Test/catch.hpp:13817: <b>  [1] </b> (buffer) <i> equal:
+  Function does not check the second iterator for over-read conditions (<a
+  href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a>). This
+  function is often discouraged by most C++ coding standards in favor of its
+  safer alternatives provided since C++14. Consider using a form of this
+  function that checks the second iterator before potentially overflowing it. </i>
+<li>../11-riziko/Test/catch.hpp:13905: <b>  [1] </b> (buffer) <i> strlen:
+  Does not handle strings that are not \0-terminated; if given one it may
+  perform an over-read (it could cause a crash if unprotected) (<a
+  href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a>). </i>
+</ul>
+<h2>Analysis Summary</h2>
+<p>
+Hits = 35
+<br>
+Lines analyzed = 115184 in approximately 11.09 seconds (10382 lines/second)
+<br>
+Physical Source Lines of Code (SLOC) = 107452
+<br>
+Hits@level = [0]   0 [1]   6 [2]  26 [3]   3 [4]   0 [5]   0 <br>
+Hits@level+ = [0+]  35 [1+]  35 [2+]  29 [3+]   3 [4+]   0 [5+]   0 <br>
+Hits/KSLOC@level+ = [0+] 0.325727 [1+] 0.325727 [2+] 0.269888 [3+] 0.0279194 [4+]   0 [5+]   0 <br>
+Minimum risk level = 1
+<br>
+Not every hit is necessarily a security vulnerability.
+<br>
+There may be other security vulnerabilities; review your code!
+<br>
+See '<a href="https://dwheeler.com/secure-programs">Secure Programming HOWTO</a>'
+(<a href="https://dwheeler.com/secure-programs">https://dwheeler.com/secure-programs</a>) for more information.
+</body>
+</html>
