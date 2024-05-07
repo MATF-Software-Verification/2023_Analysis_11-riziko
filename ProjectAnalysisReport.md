@@ -174,3 +174,36 @@ Na sledećoj slici su prikazani rezultati koji su dobijeni pod osnovnom konfigur
 Skoro sva upozorenja su vezana za imenovanje *slotova*. Koriste stari pristup, odnosno da ime slota počinje sa *on_*. Ovaj način podrazumeva da su automatski slotovi povezani sa odgovarajućim signalom, ali ovaj pristup je loš jer da se promeni ime signala ili slota, taj signal i slot više neće biti povezani. Bolje je eksplicitno povezati signal i slot uz naredbu *connect*.
 
 Drugo upozorenje koje se javlja je da *Q_PROPERTY* treba da bude *CONSTANT* ili *NOTIFY*. *Q_PROPERTY* se uglavnom koristi za povezivanje varijable sa geterom i seterom kao i slanje signala. Prednost korišćenja *Q_PROPERTY* je to što se takvim varijablama može pristupiti u okviru QML-a. U konkretnim slučajevima, ne može da bude konstantna vrednost zato što postoji i seter i samim tim vrednost varijable može da se promeni. *Notify* je opcioni deo i s obzirom da ne treba da se šalje nigde signal ovaj deo može da se izostavi. Samim tim, ova upozorenja mogu da se ignorišu.
+
+
+## 3. Perf
+**Perf** je alat za profajliranje na Linux sistemima. U zavisnosti od opcija koje mu se navedu *Perf* može da prati različite događaje, da se nakači na određeni proces kao i da pravi uzorke odnosno profile na nivou niti, procesa ili procesora.
+
+Da bi se instalirao ovaj alat potrebno je pokrenuti narednu komandu koja će u zavisnosti od kernela skinuti odgovarajuću verziju:
+<pre>
+  sudo apt-get install linux-tools-$(uname -r)
+</pre>
+
+U okviru ovog projekta, *Perf* se koristio da skuplja uzorke sistema, takvi uzorci se podrazumevano čuvaju u fajlu **perf.data**.
+
+Da bismo pokrenuli ovaj alat, potrebno je da projekta kompajliramo u *Debug* modu.
+Za pokretanje alata *Perf* koristimo skriptu [run_perf.sh](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Perf/run_perf.sh). Ova skripta podrazumevano komandu za pravljenje profila.
+Radi lepšeg prikaza odmah se poziva i komanda:
+
+<pre>sudo perf report</pre> 
+
+koja služi da analizira prikupljene uzorke:
+
+![perf_report.png](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Perf/perf_report.png)
+
+Pored osnovnog izveštaja korišćen je i alat *FlameGraph* koji rezultate prikazuje u okviru vatrenih grafika. Ovaj projekat je dodat i kao *submodule* u okviru Perf direktorijuma. Na *x* osi se prikazuje populacija uzoraka a na *y* osi dubina steka.
+Skripta za pravljenje vatrenih grafika na osnovu uzoraka se nalazi u okviru fajla [run_flamegraph.sh](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Perf/run_flamegraph.sh).
+
+Ova komanda generiše naredni graf:
+
+![flame_graph.svg](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/blob/main/Perf/flame_graph.svg)
+
+***Zaključak na osnovu izveštaja alata Perf i vatrenih grafika***
+
+Na osnovu izveštaja možemo da vidimo da je prikupljeno 32.000 uzoraka a da je ukupan broj događaja oko 8.2 milijarde.
+Posmatrajući ovaj izveštaj možemo videti da u koloni *Children* komanda *QXcbEventQueue* sa svom svojom decom koju poziva odnosi najveći procenat u odnosu na ostale. Ovo može značiti da u okviru projekta postoji previše događaja koji se šalju i na koje se reaguje. Primećeno je da u okviru fajla *mainwindow.h* postoji *slot* da se reaguje na klik za svaku državu, ovo je verovatno moglo da se reši i na drugačiji način i da postoji jedan slot koji će da reaguje na događaj kada se klikne na državu a da se tom slotu prosleđuje ID države čime bi se samim tim smanjio broj događaja.
