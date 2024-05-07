@@ -7,11 +7,24 @@
 
 # :wrench: Alati koji su korišćeni:
 
-
-
+* Valgrind
+  * Callgrind
+  * Memcheck
+* Clang
+* Perf
+* Flawfinder
 
 # :memo: Zaključak:
 
+Projekat je generalno razumljiv, na momente zna da postane komplikovan i valjalo bi da se uvedu dodatni komentari. Postoji jedan veoma nejasan deo koda koji bi valjalo istražiti zašto je potreban:
+![image](https://github.com/MATF-Software-Verification/2023_Analysis_11-riziko/assets/42783584/2a0e13e2-6690-41c1-bfe0-233f6746d06b)
+
+Sa sigurnosne strane treba zameniti zastarelu *Catch* biblioteku sa novom verzijom *Catch2*.
+Na nekoliko mesta ima curenje memorije i trebalo bi obratiti pažnju na to. Takođe veliki je broj i događaja koji se dešava što potencijalno može usporiti aplikaciju.
+Neke stilske predloge bi trebalo primeniti i postarati se da se ne dešavaju slučajevi da je pokazivač neinicijalizovan a koristi se.
+Treba proveriti i konverzije iz šireg *long long* tipa u uži *int* i osigurati se da ne dolazi do potencijalnog baga i neočekivanog rezultata.
+
+Tokom samog testiranja igrice, nije pronađen bag.
 
 # Autor:
 Miloš Milaković, 1052/2021
